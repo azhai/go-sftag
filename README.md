@@ -6,6 +6,7 @@ Yet another StructTag, with some features liked cache and alias.
 package main
 import (
 	"fmt"
+    
 	"github.com/azhai/go-sftag"
 )
 
@@ -21,7 +22,7 @@ type ConnParams struct {
 
 func main() {
 	tags := sftag.GetStructTags(ConnParams{})
-	tag := NewSfTag()
+	tag := sftag.NewSfTag()
 	tag.Parse(tags["Options"])
 	fmt.Println(tag.Get("yaml"))
 	fmt.Println(tag.String())
