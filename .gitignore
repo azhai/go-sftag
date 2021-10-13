@@ -1,0 +1,16 @@
+
+.DS_Store
+.idea/
+.vs/
+.vscode/
+go.sum
+logs/
+vendor/
+
+*~
+*.bak
+*.exe
+*.lock
+*.sublime-project
+*.sublime-workspace
+*.upx

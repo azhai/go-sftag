@@ -1,12 +1,9 @@
-# go-sftag
-Yet another StructTag, with some features liked cache and alias.
+package sftag
 
-# Usage
-```go
-package main
 import (
-	"fmt"
-	"github.com/azhai/go-sftag"
+	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 // 连接配置
@@ -19,12 +16,15 @@ type ConnParams struct {
 	Options  map[string]interface{} `yaml/json:"options,omitempty" toml:"options"`
 }
 
-func main() {
-	tags := sftag.GetStructTags(ConnParams{})
+// go test -run=Parse
+func Test_01_Parse(t *testing.T) {
+	tags := GetStructTags(ConnParams{})
 	tag := NewSfTag()
-	tag.Parse(tags["Options"])
-	fmt.Println(tag.Get("yaml"))
-	fmt.Println(tag.String())
+	tag.Parse(tags["Username"])
+	assert.Equal(t, "username,omitempty", tag.Get("yaml"))
+	assert.Equal(t, `json:"username,omitempty" toml:"username" yaml:"username,omitempty"`, tag.String())
+	tag = NewSfTag()
+	tag.Parse(tags["Password"])
+	assert.Equal(t, "password", tag.Get("yaml"))
+	assert.Equal(t, `json:"password" toml:"password" yaml:"password"`, tag.String())
 }
-```
-
